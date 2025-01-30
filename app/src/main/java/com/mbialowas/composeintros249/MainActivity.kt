@@ -26,15 +26,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 
-import androidx.compose.ui.Alignment
+
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModelProvider
 import com.mbialowas.composeintros249.ui.theme.ComposeIntroS249Theme
 
 class MainActivity : ComponentActivity() {
@@ -42,11 +44,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+
             ComposeIntroS249Theme {
+                // register view model
+                val viewModel: AppViewModel = ViewModelProvider(this)[AppViewModel::class.java]
+
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     // entry point into our application
                     Column {
-                        Counter(modifier = Modifier.padding(innerPadding))
+                        Counter(modifier = Modifier.padding(innerPadding), viewModel)
                         Switcher()
                         //CustomList()
                         CustomGrid()
@@ -59,14 +65,12 @@ class MainActivity : ComponentActivity() {
     }
 }
 @Composable
-fun Counter(modifier: Modifier = Modifier){
-    var counter by remember{
-        mutableStateOf(10)
-    }
+fun Counter(modifier: Modifier = Modifier, viewModel: AppViewModel){
 
+    var counter by remember { viewModel.counter }
     Button(
          onClick = {
-             counter += 1000
+             viewModel.incrementCounter()
              Log.i("MJB", "Counter: $counter")
          }
     ){
