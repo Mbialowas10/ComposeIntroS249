@@ -29,7 +29,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 
@@ -37,7 +36,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelProvider
+import com.mbialowas.composeintros249.screens.MovieScreen
 import com.mbialowas.composeintros249.ui.theme.ComposeIntroS249Theme
+import com.mbialowas.composeintros249.vm.AppViewModel
+import com.mbialowas.composeintros249.vm.MoviesViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,15 +49,17 @@ class MainActivity : ComponentActivity() {
 
             ComposeIntroS249Theme {
                 // register view model
-                val viewModel: AppViewModel = ViewModelProvider(this)[AppViewModel::class.java]
+                val viewModel: MoviesViewModel = ViewModelProvider(this)[MoviesViewModel::class.java]
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     // entry point into our application
                     Column {
-                        Counter(modifier = Modifier.padding(innerPadding), viewModel)
-                        Switcher()
-                        //CustomList()
-                        CustomGrid()
+//                        Counter(modifier = Modifier.padding(innerPadding), viewModel)
+//                        Switcher()
+                        //                        CustomList()
+//                        CustomGrid()
+                        MovieScreen(modifier = Modifier.padding(innerPadding), viewModel)
+
                     }
 
                 }

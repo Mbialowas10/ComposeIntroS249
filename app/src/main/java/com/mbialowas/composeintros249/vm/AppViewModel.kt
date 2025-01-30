@@ -1,9 +1,6 @@
-package com.mbialowas.composeintros249
+package com.mbialowas.composeintros249.vm
 
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
 class AppViewModel: ViewModel() {
