@@ -5,10 +5,17 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
@@ -20,7 +27,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+
+
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import com.mbialowas.composeintros249.ui.theme.ComposeIntroS249Theme
 
 class MainActivity : ComponentActivity() {
@@ -34,7 +48,8 @@ class MainActivity : ComponentActivity() {
                     Column {
                         Counter(modifier = Modifier.padding(innerPadding))
                         Switcher()
-                        CustomList()
+                        //CustomList()
+                        CustomGrid()
                     }
 
                 }
@@ -95,8 +110,41 @@ fun  MyCheckbox(){
     var checked by remember {
         mutableStateOf(false)
     }
-
 }
+
+@Composable
+fun CustomGrid(){
+    val itemsList = List(50){"Item $it"}
+
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(5), // number of columns
+        modifier = Modifier.fillMaxSize()
+    ) {
+        items(itemsList) {
+            GridItem(it)
+        }
+    }
+}
+
+@Composable
+fun GridItem(itemText: String) {
+    Box(
+        modifier = Modifier
+            .size(100.dp)
+            .fillMaxSize()
+            .background(Color.Gray)
+            .border(2.dp, Color.Red),
+            contentAlignment = Alignment.Center
+    ){
+      Text(
+          text=itemText,
+          fontSize = 20.sp,
+          fontWeight = FontWeight.Bold
+      )
+    }
+}
+
+
 
 
 
